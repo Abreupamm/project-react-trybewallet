@@ -13,8 +13,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
   case ADD_EMAIL:
-    return {...state, 
-      action.email,
+    return { ...state,
+      user: { ...user,
+        email: action.payload },
     };
   default:
     return state;

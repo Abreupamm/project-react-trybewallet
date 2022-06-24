@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { validacaoEmail } from '../tests/helpers/validEmail';
+import { addEmail } from '../actions';
 
 class Login extends React.Component {
   state = {
@@ -21,25 +23,31 @@ class Login extends React.Component {
     }
   }
 
-  handleOnChangePassword = (e) => {
-    const { value } = e.target;
-    this.setState({ password: value }, () => {
-      const { password, minPassword } = this.state;
-      if (password.length >= minPassword) {
-        this.setState({ passwordValidation: true }, () => {
-          this.activeButton();
-        });
+  handleOnChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value }, () => {
+      if (name === 'email') {
+        this.validationEmail();
       } else {
-        this.setState({ passwordValidation: false }, () => {
-          this.activeButton();
-        });
+        this.validationPassword();
       }
     });
+  }
+
+  validationPassword = () => {
+    const { password, minPassword } = this.state;
+    if (password.length >= minPassword) {
+      this.setState({ passwordValidation: true }, () => {
+        this.activeButton();
+      });
+    } else {
+      this.setState({ passwordValidation: false }, () => {
+        this.activeButton();
+      });
+    }
   };
 
-  handleOnChangeEmail= (e) => {
-    const { value } = e.target;
-    this.setState({ email: value });
+  validationEmail= () => {
     const { email } = this.state;
     const emailActive = validacaoEmail(email);
     if (emailActive) {
@@ -54,7 +62,10 @@ class Login extends React.Component {
   }
 
   handleOnClick = () => {
-    const { history } = this.props;
+    const { email } = this.state;
+    const { history, dispatch } = this.props;
+    console.log(this.props);
+    dispatch(addEmail(email));
     history.push('/carteira');
   }
 
@@ -66,13 +77,14 @@ class Login extends React.Component {
           name="email"
           type="text"
           data-testid="email-input"
-          onChange={ this.handleOnChangeEmail }
+          onChange={ this.handleOnChange }
           value={ email }
         />
         <input
+          name="password"
           type="password"
           data-testid="password-input"
-          onChange={ this.handleOnChangePassword }
+          onChange={ this.handleOnChange }
           value={ password }
         />
         <button
@@ -90,6 +102,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default connect()(Login);

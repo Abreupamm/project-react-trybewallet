@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
-    const { user } = this.props;
+    const { user: { email } } = this.props;
+    console.log(email);
     return (
       <div>
         <span
           data-testid="email-field"
         >
-          {user.email}
+          {email}
         </span>
         <span
           data-testid="header-currency-field"
@@ -32,6 +33,8 @@ const mapStateToProps = (state) => ({
 });
 
 Header.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.exact({
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
 export default connect(mapStateToProps)(Header);

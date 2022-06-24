@@ -1,19 +1,31 @@
 import React from 'react';
+import { validacaoEmail } from '../tests/helpers/validEmail';
 
 class Login extends React.Component {
   state = {
     email: '',
+    emailValidation: false,
     password: '',
+    passwordValidation: false,
     active: true,
+    minPassword: 6,
   };
+
+  activeButton = () => {
+    const { emailValidation, passwordValidation } = this.state;
+    if (emailValidation === true && passwordValidation === true) {
+      this.setState({ active: false });
+    }
+  }
 
   handleOnChangePassword = (e) => {
     const { value } = e.target;
     this.setState({ password: value }, () => {
-      const { password } = this.state;
-      const numberMin = 6;
-      if (password.length >= numberMin) {
-        this.setState({ active: false });
+      const { password, minPassword } = this.state;
+      if (password.length >= minPassword) {
+        this.setState({ passwordValidation: true }, () => {
+          this.activeButton();
+        });
       }
     });
   };
@@ -21,6 +33,13 @@ class Login extends React.Component {
   handleOnChangeEmail= (e) => {
     const { value } = e.target;
     this.setState({ email: value });
+    const { email } = this.state;
+    const emailActive = validacaoEmail(email);
+    if (emailActive) {
+      this.setState({ emailValidation: true }, () => {
+        this.activeButton();
+      });
+    }
   }
 
   // handleOnClick = () => {
@@ -31,7 +50,8 @@ class Login extends React.Component {
     return (
       <div>
         <input
-          type="email"
+          name="email"
+          type="text"
           data-testid="email-input"
           onChange={ this.handleOnChangeEmail }
           value={ email }
@@ -39,7 +59,6 @@ class Login extends React.Component {
         <input
           type="password"
           data-testid="password-input"
-          minLength="6"
           onChange={ this.handleOnChangePassword }
           value={ password }
         />

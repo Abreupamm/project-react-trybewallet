@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { validacaoEmail } from '../funcs/validEmail';
+import validacaoEmail from '../funcs/validEmail';
 import { addEmail } from '../actions';
 
 class Login extends React.Component {

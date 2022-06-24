@@ -1,11 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
-    const { user: { email } } = this.props;
-    console.log(email);
+    // const { user: { email } } = this.props;
+    // console.log(email);
+    const { email } = this.props;
     return (
       <div>
         <span
@@ -28,13 +29,14 @@ class Header extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
+// const mapStateToProps = (state) => ({
+//   user: state.user,
+// });
 
 Header.propTypes = {
-  user: PropTypes.exact({
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  email: PropTypes.string.isRequired,
+  // user: PropTypes.exact({
+  //   email: PropTypes.string.isRequired,
+  // }).isRequired,
 };
-export default connect(mapStateToProps)(Header);
+export default Header;

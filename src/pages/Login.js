@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { validacaoEmail } from '../tests/helpers/validEmail';
 
 class Login extends React.Component {
@@ -15,6 +16,8 @@ class Login extends React.Component {
     const { emailValidation, passwordValidation } = this.state;
     if (emailValidation === true && passwordValidation === true) {
       this.setState({ active: false });
+    } else {
+      this.setState({ active: true });
     }
   }
 
@@ -24,6 +27,10 @@ class Login extends React.Component {
       const { password, minPassword } = this.state;
       if (password.length >= minPassword) {
         this.setState({ passwordValidation: true }, () => {
+          this.activeButton();
+        });
+      } else {
+        this.setState({ passwordValidation: false }, () => {
           this.activeButton();
         });
       }
@@ -39,11 +46,17 @@ class Login extends React.Component {
       this.setState({ emailValidation: true }, () => {
         this.activeButton();
       });
+    } else {
+      this.setState({ emailValidation: false }, () => {
+        this.activeButton();
+      });
     }
   }
 
-  // handleOnClick = () => {
-  // }
+  handleOnClick = () => {
+    const { history } = this.props;
+    history.push('/carteira');
+  }
 
   render() {
     const { active, password, email } = this.state;
@@ -72,5 +85,11 @@ class Login extends React.Component {
       </div>);
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;

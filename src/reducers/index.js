@@ -1,6 +1,6 @@
 import user from './user';
 import wallet from './wallet';
-import { ADD_EMAIL } from '../actions';
+import { ADD_EMAIL, ADD_CURRENCIES } from '../actions';
 
 // Configure os seus reducers.
 // ATENÇÃO: você obrigatoriamente tem que utilizar as chaves "user" e "wallet" no seu estado global
@@ -16,6 +16,9 @@ const reducer = (state = initialState, action) => {
     return { ...state,
       user: { email: action.payload },
     };
+    case ADD_CURRENCIES:
+      return { ...state
+      }
   default:
     return state;
   }

@@ -19,3 +19,8 @@ export const fetchCurrenciesThunk = () => async (dispatch) => {
   const listResult = result.filter((elemnet) => elemnet !== 'USDT');
   dispatch(fetchCurrenciesSucess(listResult));
 };
+
+export const getExchangeRateTunck = (currency) => async () => {
+  const response = await getCurrencies();
+  return response[currency];
+};

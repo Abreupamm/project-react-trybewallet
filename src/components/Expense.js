@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getExchangeRateTunck } from '../actions';
 
 class Expense extends React.Component {
   state = {
@@ -19,6 +20,10 @@ class Expense extends React.Component {
   }
 
   handleOnClick = () => {
+    const { currency } = this.state;
+    const { dispatch } = this.props;
+    const c = dispatch(getExchangeRateTunck(currency));
+    console.log(c);
     this.newID();
   }
 
@@ -107,6 +112,7 @@ const mapStateToProps = (state) => ({
 
 Expense.propTypes = {
   currencies: PropTypes.objectOf(PropTypes.string).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Expense);

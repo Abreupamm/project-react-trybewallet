@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Expense from '../components/Expense';
 import { fetchCurrenciesThunk } from '../actions';
 
 class Wallet extends React.Component {
@@ -16,6 +17,7 @@ render() {
   return (
     <div>
       <Header email={ email } />
+      <Expense />
       TrybeWallet
     </div>
   );

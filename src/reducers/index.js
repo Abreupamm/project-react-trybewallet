@@ -16,9 +16,11 @@ const reducer = (state = initialState, action) => {
     return { ...state,
       user: { email: action.payload },
     };
-    case ADD_CURRENCIES:
-      return { ...state
-      }
+  case ADD_CURRENCIES:
+    return { ...state,
+      wallet: { ...wallet,
+        currencies: action.payload },
+    };
   default:
     return state;
   }

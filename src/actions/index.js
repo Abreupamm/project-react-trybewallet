@@ -15,7 +15,7 @@ export const fetchCurrenciesSucess = (currencies) => ({
 
 export const fetchCurrenciesThunk = () => async (dispatch) => {
   const response = await getCurrencies();
-  const result = [];
-  response.map((currencie) => result.push(currencie.code));
-  dispatch(fetchCurrenciesSucess(result));
+  const result = Object.keys(response);
+  const listResult = result.filter((elemnet) => elemnet !== 'USDT');
+  dispatch(fetchCurrenciesSucess(listResult));
 };

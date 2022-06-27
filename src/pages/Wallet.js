@@ -12,11 +12,9 @@ componentDidMount = () => {
 }
 
 render() {
-  const { user } = this.props;
-  const { email } = user;
   return (
     <div>
-      <Header email={ email } />
+      <Header />
       <Expense />
       TrybeWallet
     </div>
@@ -24,15 +22,12 @@ render() {
 }
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
+// const mapStateToProps = (state) => ({
+//   user: state.user,
+// });
 
 Wallet.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Wallet);
+export default connect(null)(Wallet);

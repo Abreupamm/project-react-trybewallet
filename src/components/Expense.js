@@ -11,7 +11,7 @@ class Expense extends React.Component {
     currency: 'USD',
     method: 'Dinheio',
     tag: 'Alimentação',
-    // exchangeRates: {},
+    exchangeRates: {},
   }
 
   handleOnChange = (e) => {
@@ -20,10 +20,17 @@ class Expense extends React.Component {
   }
 
   handleOnClick = () => {
-    const { currency } = this.state;
+    const { currency, exchangeRates } = this.state;
     const { dispatch } = this.props;
-    const c = dispatch(getExchangeRateTunck(currency));
-    console.log(c);
+    const objCurrency = dispatch(getExchangeRateTunck(currency));
+    const time = 5000;
+    setTimeout(() => {
+      const obj = { [currency]: objCurrency };
+      console.log(objCurrency);
+      this.setState({ exchangeRates: obj });
+      console.log(exchangeRates);
+    }, time);
+    // console.log(objCurrency);
     this.newID();
   }
 

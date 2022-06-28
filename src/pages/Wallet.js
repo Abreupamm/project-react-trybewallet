@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Expense from '../components/Expense';
+import Table from '../components/Table';
 import { fetchCurrenciesThunk } from '../actions';
 
 class Wallet extends React.Component {
@@ -35,7 +36,7 @@ render() {
     <div>
       <Header total={ total } />
       <Expense totalFunc={ this.totalExpense } />
-      TrybeWallet
+      <Table />
     </div>
   );
 }

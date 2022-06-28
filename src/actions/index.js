@@ -2,7 +2,7 @@ import getCurrencies from '../funcs/currencies';
 
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
-export const ADD_EXCHANGE_RATE = 'ADD_EXCHANGE_RATE';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -21,15 +21,7 @@ export const fetchCurrenciesThunk = () => async (dispatch) => {
   dispatch(fetchCurrenciesSucess(listResult));
 };
 
-export const getExchangeRateTunckSucess = (currency) => ({
-  type: ADD_EXCHANGE_RATE,
-  payload: currency,
+export const addExpense = (expense) => ({
+  type: ADD_EXPENSE,
+  payload: expense,
 });
-
-export const getExchangeRateTunck = (currency) => async () => {
-  const response = await getCurrencies();
-  return { code: response[currency].code,
-    name: response[currency].name,
-    ask: response[currency].ask,
-  };
-};

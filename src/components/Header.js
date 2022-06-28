@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
-    const { user: { email } } = this.props;
+    const { user: { email }, total } = this.props;
     return (
       <div>
         <span
@@ -17,11 +17,11 @@ class Header extends React.Component {
         >
           BRL
         </span>
+        <span>Total gasto:</span>
         <span
           data-testid="total-field"
         >
-          Total gasto:
-          {0}
+          {total}
         </span>
       </div>
     );
@@ -32,6 +32,7 @@ Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }).isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({

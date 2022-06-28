@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getExchangeRateTunck } from '../actions';
+import getCurrencies from '../funcs/currencies';
+import { addExpense } from '../actions';
 
 class Expense extends React.Component {
   state = {
@@ -19,18 +20,13 @@ class Expense extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleOnClick = () => {
-    const { currency, exchangeRates } = this.state;
-    const { dispatch } = this.props;
-    const objCurrency = dispatch(getExchangeRateTunck(currency));
-    const time = 5000;
-    setTimeout(() => {
-      const obj = { [currency]: objCurrency };
-      console.log(objCurrency);
-      this.setState({ exchangeRates: obj });
-      console.log(exchangeRates);
-    }, time);
-    // console.log(objCurrency);
+  handleOnClick = async () => {
+    const { dispatch, totalFunc } = this.props;
+    const objCurrency = await getCurrencies();
+    this.setState({ exchangeRates: objCurrency });
+    dispatch(addExpense(this.state));
+    totalFunc();
+    this.setState({ value: '' });
     this.newID();
   }
 
@@ -120,6 +116,7 @@ const mapStateToProps = (state) => ({
 Expense.propTypes = {
   currencies: PropTypes.objectOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
+  totalFunc: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Expense);

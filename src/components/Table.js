@@ -33,7 +33,14 @@ class Table extends React.Component {
             <td>{Number(obj.exchangeRates[obj.currency].ask).toFixed(2)}</td>
             <td>{this.newValue(obj)}</td>
             <td>Real</td>
-            <td>{}</td>
+            <td>
+              <button
+                type="button"
+                data-testid="delete-btn"
+              >
+                Excluir
+              </button>
+            </td>
           </tr>
         ))}
       </table>

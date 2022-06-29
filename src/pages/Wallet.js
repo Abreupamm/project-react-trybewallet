@@ -11,6 +11,8 @@ class Wallet extends React.Component {
     total: 0,
   }
 
+handleDelet = () => {}
+
 componentDidMount = () => {
   const { dispatch } = this.props;
   dispatch(fetchCurrenciesThunk());
@@ -35,7 +37,10 @@ render() {
   return (
     <div>
       <Header total={ total } />
-      <Expense totalFunc={ this.totalExpense } />
+      <Expense
+        clickDelete={ this.handleDelet() }
+        totalFunc={ this.totalExpense }
+      />
       <Table />
     </div>
   );

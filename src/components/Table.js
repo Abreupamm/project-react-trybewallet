@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Table extends React.Component {
+  handleOnClickDelet = (e) => {
+    // const { handleDelet } = this.props;
+    // handleDelet();
+    const { target } = e;
+    console.log(target);
+  }
+
   newValue = (obj) => {
     const convertedValue = obj.value * obj.exchangeRates[obj.currency].ask;
     return convertedValue.toFixed(2);
@@ -35,8 +42,10 @@ class Table extends React.Component {
             <td>Real</td>
             <td>
               <button
+                id={ obj.id }
                 type="button"
                 data-testid="delete-btn"
+                onClick={ this.handleOnClickDelet }
               >
                 Excluir
               </button>
@@ -53,6 +62,7 @@ const mapStateToProps = (state) => ({
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // handleDelet: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

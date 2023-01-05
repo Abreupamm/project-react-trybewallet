@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validacaoEmail from '../funcs/validEmail';
 import { addEmail } from '../actions';
+import walletIcon from '../images/page-banner-fundo-adesivo-vetor.jpg';
+import '../App.css';
 
 class Login extends React.Component {
   state = {
@@ -71,28 +73,34 @@ class Login extends React.Component {
   render() {
     const { active, password, email } = this.state;
     return (
-      <div>
-        <input
-          name="email"
-          type="text"
-          data-testid="email-input"
-          onChange={ this.handleOnChange }
-          value={ email }
-        />
-        <input
-          name="password"
-          type="password"
-          data-testid="password-input"
-          onChange={ this.handleOnChange }
-          value={ password }
-        />
-        <button
-          type="button"
-          onClick={ this.handleOnClick }
-          disabled={ active }
-        >
-          Entrar
-        </button>
+      <div className="container-login">
+        <img src={ walletIcon } alt="icon" />
+        <h2>Minha Carteira</h2>
+        <div className="container-form">
+          <input
+            name="email"
+            type="text"
+            data-testid="email-input"
+            onChange={ this.handleOnChange }
+            value={ email }
+            placeholder="E-mail"
+          />
+          <input
+            name="password"
+            type="password"
+            data-testid="password-input"
+            onChange={ this.handleOnChange }
+            value={ password }
+            placeholder="digite uma senha"
+          />
+          <button
+            type="button"
+            onClick={ this.handleOnClick }
+            disabled={ active }
+          >
+            Entrar
+          </button>
+        </div>
       </div>);
   }
 }

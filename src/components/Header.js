@@ -10,18 +10,18 @@ class Header extends React.Component {
         <span
           data-testid="email-field"
         >
-          {email}
+          {`E-mail: ${email}`}
         </span>
-        <span
+        {/* <span
           data-testid="header-currency-field"
         >
-          BRL
-        </span>
+        </span> */}
         <span>Total gasto:</span>
         <span
           data-testid="total-field"
         >
-          {total}
+          {`${total.toLocaleString('pt-br',
+            { style: 'currency', currency: 'BRL' })}  BRL`}
         </span>
       </div>
     );

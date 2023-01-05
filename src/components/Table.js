@@ -7,7 +7,7 @@ class Table extends React.Component {
     // const { handleDelet } = this.props;
     // handleDelet();
     const { target } = e;
-    console.log(target);
+    console.log(target.parentNode.parentNode);
   }
 
   newValue = (obj) => {
